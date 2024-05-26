@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Weapon Skin Guesser</title>
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
     <h1>
@@ -15,6 +17,9 @@
             <img id="zoomed-image" src="" alt="Zoomed In Skin">
             <button id="left-arrow" class="arrow-button">&larr;</button>
             <button id="right-arrow" class="arrow-button">&rarr;</button>
+            <button id="up-arrow" class="arrow-button">&uarr;</button>
+            <button id="down-arrow" class="arrow-button">&darr;</button>
+
         </div>
         <div id="choices">
             <button class="choice-button" id="choice1">Skin 1</button>
@@ -24,6 +29,16 @@
         <button id="submit-button">Submit</button>
         <div id="finished-message"></div>
         <div id="correct-count">Correct Choices: 0</div>
+        <button id="restart-button" style="display: none;">Restart</button> <!-- New restart button -->
         <script src="script.js"></script>
 </body>
-</html>
+<footer>
+    <div id="footer">
+        SkinGuessr
+    </div>
+    <div id="footer2">   
+        nelio.gg
+    </div>
+
+</footer>
+</html> 
