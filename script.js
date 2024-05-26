@@ -99,17 +99,30 @@ function checkChoice(choice) {
 function handleArrowClick(direction) {
     let left = parseInt(zoomedImage.style.left) || 0;
     let top = parseInt(zoomedImage.style.top) || 0;
+    let containerWidth = imageContainer.clientWidth;
+    let containerHeight = imageContainer.clientHeight;
 
-    if (direction === 'left' && left < 0) {
-        zoomedImage.style.left = `${left + 50}px`;
-    } else if (direction === 'right' && left > -(zoomedImage.width - imageContainer.clientWidth)) {
-        zoomedImage.style.left = `${Math.max(-(zoomedImage.width - imageContainer.clientWidth), left - 50)}px`;
-    } else if (direction === 'up' && top < 0) {
-        zoomedImage.style.top = `${top + 50}px`;
-    } else if (direction === 'down' && top > -(zoomedImage.height - imageContainer.clientHeight)) {
-        zoomedImage.style.top = `${Math.max(-(zoomedImage.height - imageContainer.clientHeight), top - 50)}px`;
+    // Calculate the maximum allowable left and top positions
+    let maxLeft = 0;
+    let maxTop = 0;
+    let minLeft = -(zoomedImage.width - containerWidth);
+    let minTop = -(zoomedImage.height - containerHeight);
+
+    if (direction === 'left') {
+        left = Math.min(maxLeft, left + movementSpeed);
+    } else if (direction === 'right') {
+        left = Math.max(minLeft, left - movementSpeed);
+    } else if (direction === 'up') {
+        top = Math.min(maxTop, top + movementSpeed);
+    } else if (direction === 'down') {
+        top = Math.max(minTop, top - movementSpeed);
     }
+
+    // Update the position of the zoomed-in image
+    zoomedImage.style.left = `${left}px`;
+    zoomedImage.style.top = `${top}px`;
 }
+
 
 leftArrow.addEventListener('click', () => handleArrowClick('left'));
 rightArrow.addEventListener('click', () => handleArrowClick('right'));
@@ -197,7 +210,7 @@ function stopMoving() {
 }
 
 // Define a variable to control the speed of movement
-const movementSpeed = 2; // Adjust this value to change the speed
+const movementSpeed = 20; // Adjust this value to change the speed
 
 // Function to start moving the image continuously when the button is held down
 function startMoving(direction) {
