@@ -1,3 +1,4 @@
+
 const imageContainer = document.getElementById('image-container');
 const zoomedImage = document.getElementById('zoomed-image');
 const choices = document.querySelectorAll('.choice-button');
@@ -6,9 +7,19 @@ const correctCountDisplay = document.getElementById('correct-count');
 const finishedMessage = document.getElementById('finished-message');
 const leftArrow = document.getElementById('left-arrow');
 const rightArrow = document.getElementById('right-arrow');
+const upArrow = document.getElementById('up-arrow');
+const downArrow = document.getElementById('down-arrow');
 
-let images = ['image1.png', 'image2.png', 'image3.png']; // Example images
-let skinsFolder = ['image1.png', 'image2.jpg', 'image3_skin.jpg']; // Correct choices
+let images = ['AKCaseHardened.png',
+'DesertHydra.png',
+'AWPRedLine.png',
+'AWPFade.png',
+'AWPDragonLore.png']; // Example images
+let skinsFolder = ['AKCaseHardened.png',
+'DesertHydra.png',
+'AWPRedLine.png',
+'AWPFade.png',
+'AWPDragonLore.png']; // Correct choices
 let currentIndex = 0;
 let correctIndex;
 let correctChoices = 0;
@@ -20,32 +31,84 @@ function loadRandomImage() {
     correctIndex = currentIndex; // Assume same index is correct
     zoomedImage.src = `images/${images[currentIndex]}`;
     zoomedImage.style.left = '0px';
+    zoomedImage.style.top = '0px'; // Reset top position
+    zoomedImage.style.bottom = '0px';
+    zoomedImage.style.right = '0px';
+    zoomedImage.style.width = 'auto'; // Reset width to auto
+    zoomedImage.style.height = 'auto'; // Reset height to auto
 }
 
 function loadChoices() {
-    let choicesArray = [...skinsFolder];
-    choicesArray.sort(() => 0.5 - Math.random());
+    let availableChoices = [...skinsFolder]; // Create a copy of skinsFolder to track available choices
+    let correctChoice = skinsFolder[correctIndex];
+    
+    // Remove the correct choice from availableChoices
+    availableChoices = availableChoices.filter(choice => choice !== correctChoice);
+
+    // Shuffle availableChoices
+    availableChoices.sort(() => 0.5 - Math.random());
+
+    // Determine the number of choices to display (including the correct choice)
+    const numChoicesToShow = Math.min(choices.length, availableChoices.length + 1);
+
+    // Randomly select a few choices from availableChoices (including the correct choice)
+    let selectedChoices = availableChoices.slice(0, numChoicesToShow - 1);
+    selectedChoices.push(correctChoice);
+
+    // Fill remaining choices with randomly selected options from the pool of skins
+    while (selectedChoices.length < numChoicesToShow) {
+        let randomIndex = Math.floor(Math.random() * skinsFolder.length);
+        let randomChoice = skinsFolder[randomIndex];
+        if (!selectedChoices.includes(randomChoice)) {
+            selectedChoices.push(randomChoice);
+        }
+    }
+
+    // Shuffle the selected choices
+    selectedChoices.sort(() => 0.5 - Math.random());
+
+    // Assign choices to choice buttons
     choices.forEach((choice, index) => {
-        choice.innerText = `Skin ${index + 1}`;
-        choice.dataset.choice = choicesArray[index];
+        let skinImg;
+        if (index < selectedChoices.length) {
+            skinImg = new Image();
+            skinImg.src = `FullSkins/${selectedChoices[index]}`;
+            choice.dataset.choice = selectedChoices[index];
+        }
+        choice.innerHTML = ''; // Clear previous content
+        choice.appendChild(skinImg || document.createTextNode("")); // Append the image or an empty text node
     });
 }
 
+
+
+
+
 function checkChoice(choice) {
-    return choice === `images/${skinsFolder[correctIndex]}`;
+    return choice === skinsFolder[correctIndex]; // Compare file names instead of full paths
 }
 
 function handleArrowClick(direction) {
     let left = parseInt(zoomedImage.style.left) || 0;
+    let top = parseInt(zoomedImage.style.top) || 0;
+
     if (direction === 'left' && left < 0) {
         zoomedImage.style.left = `${left + 50}px`;
-    } else if (direction === 'right' && left > -2000) {
-        zoomedImage.style.left = `${left - 50}px`;
+    } else if (direction === 'right' && left > -(zoomedImage.width - imageContainer.clientWidth)) {
+        zoomedImage.style.left = `${Math.max(-(zoomedImage.width - imageContainer.clientWidth), left - 50)}px`;
+    } else if (direction === 'up' && top < 0) {
+        zoomedImage.style.top = `${top + 50}px`;
+    } else if (direction === 'down' && top > -(zoomedImage.height - imageContainer.clientHeight)) {
+        zoomedImage.style.top = `${Math.max(-(zoomedImage.height - imageContainer.clientHeight), top - 50)}px`;
     }
 }
 
+
 leftArrow.addEventListener('click', () => handleArrowClick('left'));
 rightArrow.addEventListener('click', () => handleArrowClick('right'));
+upArrow.addEventListener('click', () => handleArrowClick('up'));
+downArrow.addEventListener('click', () => handleArrowClick('down'));
+
 
 submitButton.addEventListener('click', () => {
     if (attempts >= maxAttempts) return;
@@ -53,9 +116,19 @@ submitButton.addEventListener('click', () => {
     if (selectedChoice) {
         if (checkChoice(selectedChoice.dataset.choice)) {
             correctChoices++;
-            alert("Correct Choice!"); // Pop up for correct choice
+            Swal.fire({
+                icon: 'success',
+                title: 'Correct Choice!',
+                showConfirmButton: false,
+                timer: 1000
+            }); // Pop up for correct choice
         } else {
-            alert("Wrong Choice!"); // Pop up for wrong choice
+            Swal.fire({
+                icon: 'error',
+                title: 'Wrong Choice!',
+                showConfirmButton: false,
+                timer: 1000
+            }); // Pop up for wrong choice
         }
         attempts++;
         correctCountDisplay.innerText = `Correct Choices: ${correctChoices}`;
@@ -66,8 +139,10 @@ submitButton.addEventListener('click', () => {
             loadRandomImage();
             loadChoices();
         }
+        selectedChoice.classList.remove('selected'); // Remove selected class
     }
 });
+
 
 choices.forEach(choice => {
     choice.addEventListener('click', () => {
@@ -86,6 +161,8 @@ let isButtonDown = false;
 // Add event listeners for mousedown and mouseup events on the arrow buttons
 leftArrow.addEventListener('mousedown', () => startMoving('left'));
 rightArrow.addEventListener('mousedown', () => startMoving('right'));
+upArrow.addEventListener('mousedown', () => startMoving('up'));
+downArrow.addEventListener('mousedown', () => startMoving('down'));
 document.addEventListener('mouseup', stopMoving);
 
 // Function to start moving the image continuously when the button is held down
@@ -121,3 +198,15 @@ function startMoving(direction) {
     }
     move(); // Start moving initially
 }
+
+const restartButton = document.getElementById('restart-button');
+
+restartButton.addEventListener('click', () => {
+    correctChoices = 0;
+    attempts = 0;
+    correctCountDisplay.innerText = `Correct Choices: ${correctChoices}`;
+    finishedMessage.style.display = 'none';
+    restartButton.style.display = 'none';
+    loadRandomImage();
+    loadChoices();
+});
