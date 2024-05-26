@@ -14,11 +14,23 @@ let images = ['AKCaseHardened.png',
 'DesertHydra.png',
 'AWPRedLine.png',
 'AWPFade.png',
+'M4ControlPanel.png',
+'TEC9RemoteControl.png',
+'XMIrezumi.png',
+'AUGRandomAccess.png',
+'MAGCoreBreach.png',
+'AWPAcheron.png',
 'AWPDragonLore.png']; // Example images
 let skinsFolder = ['AKCaseHardened.png',
 'DesertHydra.png',
 'AWPRedLine.png',
 'AWPFade.png',
+'M4ControlPanel.png',
+'TEC9RemoteControl.png',
+'XMIrezumi.png',
+'AUGRandomAccess.png',
+'MAGCoreBreach.png',
+'AWPAcheron.png',
 'AWPDragonLore.png']; // Correct choices
 let currentIndex = 0;
 let correctIndex;
@@ -80,10 +92,6 @@ function loadChoices() {
     });
 }
 
-
-
-
-
 function checkChoice(choice) {
     return choice === skinsFolder[correctIndex]; // Compare file names instead of full paths
 }
@@ -103,12 +111,10 @@ function handleArrowClick(direction) {
     }
 }
 
-
 leftArrow.addEventListener('click', () => handleArrowClick('left'));
 rightArrow.addEventListener('click', () => handleArrowClick('right'));
 upArrow.addEventListener('click', () => handleArrowClick('up'));
 downArrow.addEventListener('click', () => handleArrowClick('down'));
-
 
 submitButton.addEventListener('click', () => {
     if (attempts >= maxAttempts) return;
@@ -133,8 +139,17 @@ submitButton.addEventListener('click', () => {
         attempts++;
         correctCountDisplay.innerText = `Correct Choices: ${correctChoices}`;
         if (attempts >= maxAttempts) {
-            finishedMessage.style.display = 'block';
-            finishedMessage.innerText = `Finished! You guessed correctly ${correctChoices} times.`;
+            Swal.fire({
+                title: 'Finished!',
+                text: `You guessed correctly ${correctChoices} times out of 10. Press OK to Refresh.`,
+                showCancelButton: false,
+                confirmButtonText: 'OK',
+                allowOutsideClick: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload(); // Reload the page
+                }
+            });
         } else {
             loadRandomImage();
             loadChoices();
@@ -142,7 +157,6 @@ submitButton.addEventListener('click', () => {
         selectedChoice.classList.remove('selected'); // Remove selected class
     }
 });
-
 
 choices.forEach(choice => {
     choice.addEventListener('click', () => {
@@ -153,7 +167,6 @@ choices.forEach(choice => {
 
 loadRandomImage();
 loadChoices();
-
 
 // Define a variable to keep track of whether the button is being held down
 let isButtonDown = false;
@@ -198,15 +211,3 @@ function startMoving(direction) {
     }
     move(); // Start moving initially
 }
-
-const restartButton = document.getElementById('restart-button');
-
-restartButton.addEventListener('click', () => {
-    correctChoices = 0;
-    attempts = 0;
-    correctCountDisplay.innerText = `Correct Choices: ${correctChoices}`;
-    finishedMessage.style.display = 'none';
-    restartButton.style.display = 'none';
-    loadRandomImage();
-    loadChoices();
-});
