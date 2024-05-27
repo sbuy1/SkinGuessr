@@ -20,6 +20,11 @@ let images = ['AKCaseHardened.png',
 'AUGRandomAccess.png',
 'MAGCoreBreach.png',
 'AWPAcheron.png',
+'AKPointDisarray.png',
+'M4RoyalPaladin.png',
+'P90Shapewood.png',
+'PPFuelRod.png',
+'FSRetrobution.png',
 'AWPDragonLore.png']; // Example images
 let skinsFolder = ['AKCaseHardened.png',
 'DesertHydra.png',
@@ -31,6 +36,11 @@ let skinsFolder = ['AKCaseHardened.png',
 'AUGRandomAccess.png',
 'MAGCoreBreach.png',
 'AWPAcheron.png',
+'AKPointDisarray.png',
+'M4RoyalPaladin.png',
+'P90Shapewood.png',
+'PPFuelRod.png',
+'FSRetrobution.png',
 'AWPDragonLore.png']; // Correct choices
 let currentIndex = 0;
 let correctIndex;
@@ -137,14 +147,14 @@ submitButton.addEventListener('click', () => {
             correctChoices++;
             Swal.fire({
                 icon: 'success',
-                title: 'Correct Choice!',
+                title: 'Correct Skin!',
                 showConfirmButton: false,
                 timer: 1000
             }); // Pop up for correct choice
         } else {
             Swal.fire({
                 icon: 'error',
-                title: 'Wrong Choice!',
+                title: 'Wrong Skin!',
                 showConfirmButton: false,
                 timer: 1000
             }); // Pop up for wrong choice
@@ -210,7 +220,7 @@ function stopMoving() {
 }
 
 // Define a variable to control the speed of movement
-const movementSpeed = 20; // Adjust this value to change the speed
+const movementSpeed = 30; // Adjust this value to change the speed
 
 // Function to start moving the image continuously when the button is held down
 function startMoving(direction) {

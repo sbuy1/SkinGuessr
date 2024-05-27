@@ -27,6 +27,7 @@ h1 {
 #zoomed-image {
   position: absolute;
   width: auto;
+  height: auto;
 }
 .arrow-button {
   position: absolute;
