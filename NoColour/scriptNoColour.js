@@ -51,7 +51,7 @@ const maxAttempts = 10;
 function loadRandomImage() {
     currentIndex = Math.floor(Math.random() * images.length);
     correctIndex = currentIndex; // Assume same index is correct
-    zoomedImage.src = `images/${images[currentIndex]}`;
+    zoomedImage.src = `../images/${images[currentIndex]}`;
     zoomedImage.style.left = '0px';
     zoomedImage.style.top = '0px'; // Reset top position
     zoomedImage.style.bottom = '0px';
@@ -97,7 +97,7 @@ function loadChoices() {
         let skinImg;
         if (index < selectedChoices.length) {
             skinImg = new Image();
-            skinImg.src = `FullSkins/${selectedChoices[index]}`;
+            skinImg.src = `../FullSkins/${selectedChoices[index]}`;
             choice.dataset.choice = selectedChoices[index];
         }
         choice.innerHTML = ''; // Clear previous content
