@@ -5,15 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SkinGuesser</title>
 <link rel="icon" href="logo\image_2024-05-27_014431959-removebg-preview.png" type="image/ico"/>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="styleBlurred.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <h1>
-        <img src="logo\SkinGuessr.gif" alt="Skin Guessr">
+        <img src="logo\2024-05-27-SKINGUESSR-BLURRED.gif" alt="Skin Guessr">
     </h1>
     <div id="main-container">
         <div id="image-container">
+            <div id="blur-overlay"></div> <!-- New overlay div for blur effect -->
+
             <img id="zoomed-image" src="" alt="Zoomed In Skin">
             <button id="left-arrow" class="arrow-button">&larr;</button>
             <button id="right-arrow" class="arrow-button">&rarr;</button>
