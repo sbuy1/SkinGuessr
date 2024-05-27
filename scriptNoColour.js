@@ -58,6 +58,9 @@ function loadRandomImage() {
     zoomedImage.style.right = '0px';
     zoomedImage.style.width = 'auto'; // Reset width to auto
     zoomedImage.style.height = 'auto'; // Reset height to auto
+    
+    // Apply black and white filter
+    zoomedImage.style.filter = 'grayscale(100%)';
 }
 
 function loadChoices() {
