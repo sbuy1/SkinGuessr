@@ -104,6 +104,7 @@ h1 {
 }
 .choice-button {
   padding: 8px 16px;
+  width: 550px;
   font-size: 14px;
   border: 3px solid #000;
   cursor: pointer;
@@ -138,18 +139,12 @@ h1 {
   border: 3px solid #000;
   border-radius: 20px;
 }
-#finished-message {
-  margin: 75px; /* Add space above and below the message */
-  display: none;
-  font-size: 24px;
-  font-weight: bold;
-  color: #FCFF68;
-}
 
 #footer1 {
   margin-top: 250px;
   padding: 50px;
 }
+
 #footer2 {
   padding: 30px;
 }
@@ -180,4 +175,84 @@ h1 {
   bottom: 10px; /* Adjust position as needed */
   left: 50%;
   transform: translateX(-50%);
+}
+
+/* Base styles remain the same */
+
+/* Responsive adjustments */
+@media only screen and (max-width: 600px) {
+  /* Adjustments for smaller screens */
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center all content horizontally */
+    justify-content: center; /* Center all content vertically */
+    height: 100vh; /* Ensure content takes up the full height of the viewport */
+    padding: 0 10px; /* Add padding to the sides */
+  }
+
+  h1 {
+    height: auto; /* Reset header height */
+    margin: 0; /* Reset header margin */
+    margin-bottom: 20px; /* Add margin to create space between header and other elements */
+  }
+
+  #menu {
+    position: static; /* Remove fixed position */
+    margin-top: 20px; /* Add margin to create space between menu and other elements */
+    margin-bottom: 20px; /* Add margin to create space between menu and other elements */
+  }
+
+  #main-container {
+    width: 100%; /* Ensure main container takes up full width */
+    max-width: 500px; /* Limit maximum width to prevent stretching */
+  }
+
+  #image-container {
+    width: 100%; /* Ensure image container takes up full width */
+    max-width: 500px; /* Limit maximum width to prevent stretching */
+    height: auto;
+    overflow: auto; /* Enable scrolling for smaller screens if needed */
+    margin-bottom: 20px; /* Add margin to create space between image container and other elements */
+  }
+
+  .arrow-button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+
+  #choices {
+    flex-direction: column;
+    align-items: center; /* Center the choices horizontally */
+  }
+
+  .choice-button {
+    margin-bottom: 20px;
+    width: 200px; /* Set a fixed width for choice buttons */
+  }
+
+  #submit-button {
+    padding: 25px 65px;
+    font-size: 30px;
+  }
+
+  #correct-count {
+    font-size: 18px;
+    padding: 5px 10px;
+  }
+
+  #footer1 {
+    margin-top: 20px; /* Adjust margin for footer */
+    padding: 20px; /* Adjust padding for footer */
+  }
+
+  #footer2 {
+    padding: 20px; /* Adjust padding for footer */
+  }
+
+  #footer2button {
+    padding: 10px 20px; /* Adjust padding for footer button */
+    font-size: 15px;
+  }
 }
