@@ -91,13 +91,16 @@ body {
   }
   #choices {
     display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap onto multiple lines */
     justify-content: center;
-    gap: 20px;
+    gap: 10px; /* Adjust the gap between buttons */
     margin-bottom: 20px;
   }
+  
   .choice-button {
+    flex: 1; /* Allow buttons to grow and shrink within the flex container */
+    max-width: calc(50% - 10px); /* Limit maximum width to half the container width minus gap */
     padding: 8px 16px;
-    width: 550px;
     font-size: 14px;
     border: 3px solid #000;
     cursor: pointer;
@@ -137,7 +140,7 @@ body {
     margin-top: 250px;
     padding: 50px;
   }
-  
+
   #footer2 {
     padding: 30px;
   }
@@ -170,3 +173,35 @@ body {
     transform: translateX(-50%);
   }
   
+  /* CSS for mobile devices */
+@media only screen and (max-width: 600px) {
+  /* Adjustments for smaller screens */
+  #image-container {
+    width: 90%; /* Adjust width for smaller screens */
+    height: auto; /* Let height adjust proportionally */
+    max-width: 500px; /* Limit maximum width */
+    max-height: 500px; /* Limit maximum height */
+  }
+  #main-container {
+    margin-top: 20px; /* Adjust margin for smaller screens */
+  }
+  #footer1 {
+    margin-top: 20px; /* Adjust margin for smaller screens */
+  }
+}
+
+/* Original CSS */
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body { 
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background-color: #373737;
+}
+
+/* Remaining CSS rules remain the same */
