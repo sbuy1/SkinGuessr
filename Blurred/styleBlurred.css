@@ -109,6 +109,7 @@ h1 {
   cursor: pointer;
   background-color: #FCFF68;
   border-radius: 20px;
+  zoom: 60%;
 }
 
 .choice-button:hover,
