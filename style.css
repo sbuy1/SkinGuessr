@@ -11,7 +11,7 @@ h1 {
 }
 
 #menu {
-  position: fixed;
+  position:absolute;
   top: 20px;
   right: 20px;
   z-index: 1000; /* Ensure the menu stays above other content */
@@ -23,8 +23,10 @@ h1 {
 }
 
 #menu ul li {
-  display: inline;
+  display: block;
   margin-right: 20px;
+  margin-bottom: 10px;
+  text-align: left;
 }
 
 #menu ul li a {
@@ -35,6 +37,7 @@ h1 {
 
 #menu ul li button {
   padding: 10px 10px;
+  width: 175px;
   background-color: #FCFF68;
   border: 2px solid #000;
   border-radius: 20px;
@@ -68,8 +71,8 @@ h1 {
 
 #zoomed-image {
   position: absolute;
-  width: auto;
-  height: auto;
+  width: 4000px;
+  height: 4000px;
 }
 
 .arrow-button {
@@ -109,6 +112,7 @@ h1 {
   cursor: pointer;
   background-color: #FCFF68;
   border-radius: 20px;
+  zoom: 60%;
 }
 
 .choice-button:hover,
