@@ -50,6 +50,7 @@ let images = ['AKCaseHardened.png',
 'P250Cartel.png',
 'P2000FireElemental.png',
 'XMTranquility.png',
+'MAC10WhiteFish.png',
 'AWPDragonLore.png']; // Texture images
 let skinsFolder = ['AKCaseHardened.png',
 'DesertHydra.png',
@@ -91,6 +92,7 @@ let skinsFolder = ['AKCaseHardened.png',
 'P250Cartel.png',
 'P2000FireElemental.png',
 'XMTranquility.png',
+'MAC10WhiteFish.png',
 'AWPDragonLore.png']; // Correct choices
 let currentIndex = 0;
 let correctIndex;
